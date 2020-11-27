@@ -14,6 +14,6 @@ q={
     }
   }
 
-result, status = es.query(q)
+response, status = es.query(q)
 
-es.printResponse()
+elastic.printResponse(response)

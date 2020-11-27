@@ -4,8 +4,6 @@ class elastic():
   def __init__(self, url):
     self.url = url
     self.headers = {'Content-Type': 'application/json'}
-    self.result={}
-    self.status=0
 
   def query(self, queryJson):
     data = json.dumps(queryJson)
@@ -13,27 +11,24 @@ class elastic():
     try:
       res = requests.get(url=self.url, data=data, headers=self.headers)
 
-      self.status=res.status_code
-      if self.status==200 :
-        self.result = res.content
-        self.result = self.result.decode('utf-8')
-        self.result = json.loads(self.result) #convert to json
+      status=res.status_code
+      if status==200 :
+        response = res.content
+        response = response.decode('utf-8')
+        response = json.loads(response) #convert to json
         print("Ok")
       else:
-        self.result={}
+        response={}
         print("Error with response")
 
-      return self.result, self.status
+      return response, status
 
     except:
-      self.result={}
       print("Error making request")
       return {},-1
 
-
-  def printResponse(self):
-    if self.status==200 :
-      print(json.dumps(self.result, indent=2, sort_keys=True))
-    else:
+  def printResponse(response):
+    if response=={} :
       print("No valid response to print")
-      self.result={}
+    else:
+      print(json.dumps(response, indent=2, sort_keys=True))
