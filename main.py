@@ -1,35 +1,19 @@
-import sys
-import requests, json, base64
+from lib import *
+import requests, json
 
-##Parameter for the Requests
-url = 'http://localhost:9200/shakespeare-catalog-2/_search'
-headers = {'Content-Type': 'application/json'}
+es = elastic('http://localhost:9200/shakespeare-catalog-2/_search')
 
-query = {
-          "query":{
-              "match":{
-                "text_entry.english":{
-                    "query":"The edge of war",
-                    "minimum_should_match":"2"
-                }
-              }
-          }
+q={
+    "query":{
+      "match":{
+        "text_entry.english":{
+            "query":"The edge of war",
+            "minimum_should_match":"2"
         }
-data=json.dumps(query)
+      }
+    }
+  }
 
-##Making request
-print("Making request... ", end="")
-try:
-  res = requests.get(url=url, data=data, headers=headers)
+result, status = es.query(q)
 
-  if res.status_code == 200: #ok
-    content = res.content
-    content = json.loads(content.decode('utf-8'))
-    print("Done!\n")
-    print("Result:\n")
-    print(json.dumps(content, indent=2, sort_keys=True))
-  else:
-    print("Failed! (Error {})".format(res.status_code))
-except:
-    print("Failed! (Error making request)")
-
+es.printResponse()
