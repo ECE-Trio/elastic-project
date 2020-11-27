@@ -1,4 +1,4 @@
-from lib import *
+from lib import elastic
 import requests, json
 
 es = elastic('http://localhost:9200/shakespeare-catalog-2/_search')
