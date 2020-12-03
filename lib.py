@@ -1,15 +1,43 @@
+#Self Made library by Neil Segard
+
 import requests, json
 
 class elastic():
   def __init__(self, url):
     self.url = url
-    self.headers = {'Content-Type': 'application/json'}
+
+  def send(self, jsonData):
+    headers = {'Content-Type': 'application/x-ndjson'}
+    data = json.dumps(jsonData)
+
+    try:
+      res = requests.post(url=self.url, data=data, headers=headers)
+
+      print(res)
+
+      status=res.status_code
+      if status==200 :
+        response = res.content
+        response = response.decode('utf-8')
+        response = json.loads(response) #convert to json
+        print("Ok")
+      else:
+        response={}
+        print("Error with response")
+
+      return response, status
+
+    except:
+      print("Error making request")
+      return {},-1
+
 
   def query(self, queryJson):
+    headers = {'Content-Type': 'application/json'}
     data = json.dumps(queryJson)
 
     try:
-      res = requests.get(url=self.url, data=data, headers=self.headers)
+      res = requests.get(url=self.url, data=data, headers=headers)
 
       status=res.status_code
       if status==200 :
