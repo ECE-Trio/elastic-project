@@ -9,7 +9,9 @@ Composed of
 ***
 ### Adding data
 This python script will put json data (imported from a .json file) into ElasticSearch.
+
 The program is equivalent to :
+
 `curl -H 'Content-Type: application/x-ndjson' -XPOST 'localhost:9200/python/_bulk?pretty' --data-binary @data.json`
 
 ### Retrieving data
