@@ -9,22 +9,21 @@ class elastic():
   def send(self, data):
     headers = {'Content-Type': 'application/x-ndjson'}
 
-    #try:
-    res = requests.post(url=self.url, data=data, headers=headers)
+    try:
+      print("Sending ...")
+      res = requests.post(url=self.url, data=data, headers=headers)
 
-    print(res)
+      status=res.status_code
+      if status==200 :
+        print("Ok")
+      else:
+        print("Error")
+        print(res.content.decode('ascii'))
 
-    status=res.status_code
-    if status==200 :
-      print("Ok")
-    else:
-      print("Error")
-      print(res.content.decode('ascii'))
+      return status
 
-    return status
-
-    #except:
-    #  print("Error making request")
+    except:
+      print("Error making request")
 
 
   def query(self, queryJson):
