@@ -6,30 +6,25 @@ class elastic():
   def __init__(self, url):
     self.url = url
 
-  def send(self, jsonData):
+  def send(self, data):
     headers = {'Content-Type': 'application/x-ndjson'}
-    data = json.dumps(jsonData)
 
-    try:
-      res = requests.post(url=self.url, data=data, headers=headers)
+    #try:
+    res = requests.post(url=self.url, data=data, headers=headers)
 
-      print(res)
+    print(res)
 
-      status=res.status_code
-      if status==200 :
-        response = res.content
-        response = response.decode('utf-8')
-        response = json.loads(response) #convert to json
-        print("Ok")
-      else:
-        response={}
-        print("Error with response")
+    status=res.status_code
+    if status==200 :
+      print("Ok")
+    else:
+      print("Error")
+      print(res.content.decode('ascii'))
 
-      return response, status
+    return status
 
-    except:
-      print("Error making request")
-      return {},-1
+    #except:
+    #  print("Error making request")
 
 
   def query(self, queryJson):
