@@ -14,16 +14,15 @@ class elastic():
       res = requests.post(url=self.url, data=data, headers=headers)
 
       status=res.status_code
-      if status==200 :
-        print("Ok")
-      else:
-        print("Error")
+      if status!=200 :
+        print("Error:")
         print(res.content.decode('ascii'))
 
       return status
 
     except:
       print("Error making request")
+      return -1
 
 
   def query(self, queryJson):
