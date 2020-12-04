@@ -5,11 +5,11 @@ import requests, json, time
 es = elastic('http://localhost:9200/python/_bulk?pretty')
 
 json_file = open('data.json')
-data=json_file.readlines()
-dataString="".join(data)
+data = json_file.readlines()
+dataString = "".join(data)
 
 status = es.send(dataString)
-if status==200 :
+if status == 200 :
     print("Ok")
 
 
