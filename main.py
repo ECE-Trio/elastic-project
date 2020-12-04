@@ -1,12 +1,5 @@
-from lib import elastic
+from lib import elastic #self made library
 import requests, json, time
-
-"""
-Will do the same as this command :
-curl -H 'Content-Type: application/x-ndjson' -XPOST 'localhost:9200/testpython/_bulk?pretty' --data-binary @data.json
-
-And then will retrieve one of this data with a query
-"""
 
 ##Adding data
 es = elastic('http://localhost:9200/python/_bulk?pretty')
