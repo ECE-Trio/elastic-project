@@ -1,4 +1,3 @@
-
 # Elastic project
 ECE 2020, Gr1, SubGroup 4
 Composed of
@@ -6,7 +5,11 @@ Composed of
 - DIREZ Alexis
 - SEGARD Neil
 
-***
+## Run the program
+You can run `python main.py` in a terminal to run the script.
+
+
+## Explanation
 ### Adding data
 This python script will put json data (imported from a .json file) into ElasticSearch.
 
